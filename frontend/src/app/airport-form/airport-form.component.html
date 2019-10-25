@@ -1,0 +1,83 @@
+<section id="main">
+    <h1 class="title">Where can we take you next?</h1>
+    <form [formGroup]="calculateForm" (ngSubmit)="onSubmit()">
+        <div class="control-group">
+            <mat-form-field class="field">
+                <input type="text" placeholder="Flying from" #origin aria-label="origin-airport" matInput formControlName="originAirport" [matAutocomplete]="auto" required>
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of originAirportList" [value]="option">{{option.city}}, {{option.country.name}} [{{option.code}}]</mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <button type="button" id="swap-airports" title="Swap airports" (click)="swapAirports()"><i class="material-icons icon">swap_horiz</i></button>
+
+            <mat-form-field class="field">
+                <input type="text" placeholder="Flying to" aria-label="destination-airport" matInput formControlName="destinationAirport" [matAutocomplete]="auto2" required>
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of destinationAirportList" [value]="option">
+                        {{option.city}}, {{option.country.name}} [{{option.code}}]
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            
+            <mat-form-field class="field">
+                <mat-label>Passengers</mat-label>
+                <mat-select formControlName="passengers" required>
+                    <mat-option *ngFor="let number of integerArray(20)" [value]="number">{{number}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="control-group">
+            <mat-form-field class="field">
+                <mat-label>Currency</mat-label>
+                <mat-select formControlName="currency" required>
+                    <mat-option value="EUR">Euro €</mat-option>
+                    <mat-option value="USD">US Dollar $</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="block">
+                <mat-radio-group aria-label="Select an option" #rGroup formControlName="tripType">
+                    <mat-radio-button value="ow" radioGroup="rGroup">One way</mat-radio-button>
+                    <mat-radio-button value="rt" radioGroup="rGroup">Return</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <button type="submit" mat-raised-button [disabled]="!calculateForm.valid">Check Price <i class="material-icons icon">search</i></button>
+        </div>
+    </form>
+    <div id="results" *ngIf="showResultsDiv">
+        <img *ngIf="showLoading" src="../assets/images/loading.gif"/>
+        <div id="trips" *ngIf="showTrips">
+            <div class="direction">
+                <div class="origin">
+                    <span>{{ calculateForm.value.originAirport.name }}</span>
+                    <span>{{ calculateForm.value.originAirport.city }} ({{calculateForm.value.originAirport.code}})</span>
+                    <span>{{ calculateForm.value.originAirport.country.name }}</span>
+                </div>
+                <i class="material-icons icon">airplanemode_active</i>
+                <div class="destination">
+                    <span>{{ calculateForm.value.destinationAirport.name }}</span>
+                    <span>{{ calculateForm.value.destinationAirport.city }} ({{calculateForm.value.destinationAirport.code}})</span>
+                    <span>{{ calculateForm.value.destinationAirport.country.name }}</span>
+                </div>
+            </div>
+            <div class="direction return" *ngIf="showReturnDiv">
+                <div class="origin">
+                    <span>{{ calculateForm.value.destinationAirport.name }}</span>
+                    <span>{{ calculateForm.value.destinationAirport.city }} ({{calculateForm.value.destinationAirport.code}})</span>
+                    <span>{{ calculateForm.value.destinationAirport.country.name }}</span>
+                </div>
+                <i class="material-icons icon">airplanemode_active</i>
+                <div class="destination">
+                    <span>{{ calculateForm.value.originAirport.name }}</span>
+                    <span>{{ calculateForm.value.originAirport.city }} ({{calculateForm.value.originAirport.code}})</span>
+                    <span>{{ calculateForm.value.originAirport.country.name }}</span>
+                </div>
+            </div>
+            <div class="price">
+                <div><span>Price per passenger</span><span>{{ calculateForm.value.currency }} {{ trip_price_per_passenger }}</span></div>
+                <div><span>Passengers</span><span>{{ calculateForm.value.passengers }}</span></div>
+                <div><span>Total</span><span>{{ calculateForm.value.currency }} {{ trip_price }}</span></div>
+            </div>
+        </div>
+    </div>
+</section>

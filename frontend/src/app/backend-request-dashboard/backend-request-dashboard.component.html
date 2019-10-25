@@ -1,0 +1,83 @@
+<div id="dashboard">
+
+	<div id="stats" *ngIf="res">
+		<h1>Statistics</h1>
+		<div>
+			<div class="cell">
+				<span>Total requests</span>
+				<span>{{res.info.total}}</span>
+			</div>
+			<div class="cell">
+				<span>With success</span>
+				<span>{{res.info.total_success}}</span>
+			</div>
+			<div class="cell">
+				<span>4xx</span>
+				<span>{{res.info.total_4xx}}</span>
+			</div>
+			<div class="cell">
+				<span>5xx</span>
+				<span>{{res.info.total_5xx}}</span>
+			</div>
+		</div>
+		<div>
+			<div class="cell">
+				<span>Average Response Time</span>
+				<span>{{res.response_times.average}}</span>
+			</div>
+			<div class="cell">
+				<span>Min Response Time</span>
+				<span>{{res.response_times.average}}</span>
+			</div>
+			<div class="cell">
+				<span>Max Response Time</span>
+				<span>{{res.response_times.average}}</span>
+			</div>
+			<div class="cell">
+				<span>Total Time Spent</span>
+				<span>{{res.response_times.total}}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="container mat-elevation-z8">
+		<div class="loading-shade" *ngIf="isLoadingResults">
+			<mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+		</div>
+
+		<div class="table-container">
+			<table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc">
+
+				<ng-container matColumnDef="id">
+					<th mat-header-cell *matHeaderCellDef>ID</th>
+					<td mat-cell *matCellDef="let element">{{element.id}}</td>
+				</ng-container>
+				
+				<ng-container matColumnDef="uri">
+					<th mat-header-cell *matHeaderCellDef>URI</th>
+					<td mat-cell *matCellDef="let element">{{element.uri}}</td>
+				</ng-container>
+
+				<ng-container matColumnDef="method">
+					<th mat-header-cell *matHeaderCellDef>Method</th>
+					<td mat-cell *matCellDef="let element">{{element.method}}</td>
+				</ng-container>
+
+				<ng-container matColumnDef="status">
+					<th mat-header-cell *matHeaderCellDef>Status Code</th>
+					<td mat-cell *matCellDef="let element">{{element.status}}</td>
+				</ng-container>
+
+				<ng-container matColumnDef="responseTime">
+					<th mat-header-cell *matHeaderCellDef>Response Time</th>
+					<td mat-cell *matCellDef="let element">{{element.responseTime}} ms</td>
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
+
+			<mat-paginator [pageSize]="10" [length]="resultsLength" [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+		</div>
+	</div>
+</div>

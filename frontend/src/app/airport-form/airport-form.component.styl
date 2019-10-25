@@ -1,0 +1,281 @@
+/* Google fonts*/
+
+
+/* Colors */
+$black = #000
+$white = #fff
+$dark-smokey-blue = rgb(47, 72, 88)
+$mat-green = #69D7AE
+$mat-gree-hover = #6980AE
+
+vendor(prop, args)
+    -webkit-{prop} args
+    -moz-{prop} args
+    -o-{prop} args
+    {prop} args
+
+animation()
+    vendor('animation', arguments)
+
+border-radius()
+    vendor('border-radius', arguments)
+
+box-shadow()
+    vendor('box-shadow', arguments)
+
+transition()
+    vendor('transition', arguments)
+
+transform()
+    vendor('transform', arguments)
+
+background-image()
+    vendor('background-image', arguments)
+    
+
+section#main
+	display flex
+	flex-flow column nowrap
+	align-items center
+	justify-content center
+	width 100vw
+	height 101vh
+	background transparent url('/assets/images/bg001.jpg') center bottom no-repeat
+	background-size cover
+	position relative
+	
+	&:after
+		position absolute
+		z-index 2
+		content ""
+		left 0
+		right 0
+		top 0
+		bottom 0
+		background linear-gradient(to bottom, rgba(#222, 0.6), transparent)
+		
+	> h1,
+	> form,
+	> #results
+		position relative
+		z-index 4
+		display block
+		
+	> #results
+		background-color $white
+		width 60%
+		display flex
+		flex-flow column nowrap
+		align-items center
+		justify-content center
+		padding 3vw
+		border-radius 2px
+		margin-top 2vw
+		
+		> img
+			height 60px !important
+			
+		> #trips
+			display flex
+			flex-flow column nowrap
+			align-items center
+			justify-content center
+			width 100%
+			
+			> .direction,
+			> .price
+				width 100%
+				display flex
+				flex-flow row nowrap
+				align-items center
+				justify-content space-between
+				padding 30px 0
+				
+				> .origin,
+				> .destination
+					flex 1 1 auto
+					
+					> span
+						display block
+						color #333
+						font-size 1.0em
+						margin 5px 0
+						
+						&:first-of-type,
+						&:last-of-type
+							color rgba(#333, 0.35)
+							font-size 0.74em
+							margin 0
+							
+					
+				> .destination
+					text-align right
+					
+					> span
+						text-align right
+					
+				> .icon
+					flex 0 0 10%
+					text-align center
+					color $mat-green
+					transform: rotate(90deg)
+					
+				&.return
+					border-top 1px solid rgba(#333, 0.1)
+					> .icon
+						transform: rotate(-90deg)
+						
+			> .price
+				border-top 1px solid rgba(#333, 0.1)
+				> div
+					flex 1 1 auto
+					
+					&:nth-of-type(2)
+						text-align center
+						
+					&:last-of-type
+						text-align right
+						
+					> span
+						display block
+						font-weight 600
+						
+						&:first-of-type
+							color rgba(#333, 0.35)
+							font-size 0.8em
+							
+						&:last-of-type
+							margin-top 5px
+							color #333
+							font-size 1.2em
+
+	> h1
+		padding-bottom 4vh
+		font-size 4vw
+		font-weight 600
+		color $white
+		text-shadow 1px 1px 2px rgba($black, 0.25)
+		
+	> form
+		padding 3vw
+		background-color #424242
+		width 60%
+		border-radius 2px
+		
+		.control-group
+			display flex
+			width 100%
+			flex-flow row nowrap
+			justify-content flex-start
+			
+			&:first-of-type
+				align-items flex-end
+					
+				> .field
+					flex 1 1 calc((100% - 30px) / 3)
+					
+					&:last-of-type
+						flex 0 0 calc(100% / 10)
+						margin-left 30px
+
+					> *
+						display block
+						width 100%
+				
+					> label
+						color $white
+						font-weight 600
+						font-size 0.8em
+						margin-bottom 0.5vw
+					
+					> input
+						height 30px
+						line-height 30px
+						padding 6px 10px
+						font-size 1.1em
+						border none
+						border-radius 2px
+						
+				> button#swap-airports
+					margin 0 10px
+					cursor pointer
+					height 30px
+					width 30px
+					padding 0
+					flex 0 0 30px
+					display flex
+					align-items center
+					justify-content center
+					border none
+					background-color transparent
+					border-radius 100%
+					
+					&:hover
+						background-color $mat-green
+					
+					> .icon
+						color $white
+						
+			&:nth-of-type(2)
+				align-items center
+				margin-top 2vw
+				justify-content space-between
+				
+				> .block
+					display flex
+					flex-flow row nowrap
+					align-items center
+					justify-content center
+					flex 1 1 auto
+					
+					> *
+						cursor pointer
+
+					.mat-radio-button
+						color $white
+						font-family $ff
+						&:not(:last-of-type)
+							margin-right 40px
+							
+					.mat-radio-label
+						color $white !important
+							
+
+					
+				> button[type="submit"]
+					background-color $mat-green
+					color $white
+					font-size 0.86em
+					font-weight 600
+					text-transform uppercase
+					border none
+					cursor pointer
+					display flex
+					flex-flow row nowrap
+					align-items center
+					justify-content space-between
+					
+					&:hover
+						background-color $mat-gree-hover
+						
+					> .icon
+						flex 0 0 20px
+						font-size 20px
+						color $white
+						margin-left 5px
+						
+			
+::ng-deep input.mat-input-element
+	color $white !important
+
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple
+	background-color $mat-green !important
+	
+		
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow,
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled),
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label
+	color $mat-green !important
+	
+			
+			
