@@ -5,11 +5,14 @@ Frontend: Angular CLI 8 and Angular Material
 
 [//] ![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
 
-![Alt text](images/searching.jpg?raw=true "Check flight price")
+![Alt text](images/searching.png?raw=true "Check flight price")
 
-![Alt text](images/flight-result.jpg?raw=true "Price result")
+<img width="500" src="images/searching.png?raw=true"/>\
+1. Check flight price
 
-![Alt text](images/airports-list.jpg?raw=true "List of Airports")
+![Alt text](images/flight-result.png?raw=true "Price result")
 
-![Alt text](images/backend-statistics.jpg?raw=true "Backend requests statistics")
+![Alt text](images/airports-list.png?raw=true "List of Airports")
+
+![Alt text](images/backend-statistics.png?raw=true "Backend requests statistics")
 
